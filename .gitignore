@@ -1,0 +1,4 @@
+tests/harness/runs/
+tests/harness/results/
+__pycache__/
+domains/*/raw/*.pdf

@@ -1,0 +1,8 @@
+{
+  "name": "domain",
+  "version": "0.1.0",
+  "description": "Turn a domain's scattered sources into one folder of sorted facts: charter, roles, entities, data, rules, knowledge, process, tools, unknowns.",
+  "author": {
+    "name": "hw"
+  }
+}
