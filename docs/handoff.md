@@ -1,6 +1,6 @@
 # Handoff: domain-skills, 2026-10-21
 
-**Bottom Line:** The project is defined and scaffolded, no skill is built, no domain folder exists. The next session starts with a hand harvest of three equity-research artifacts into `domains/equity-research/`, sorted by the bin test without any skill, so the first skill, `harvest-doc-level0`, encodes decisions seen in a real folder. Read `docs/project-spec.md` and `references/domain-bins.md` first; this page says where to begin and what was decided.
+**Bottom Line:** Four skills exist (`harvest-doc-level0`, `sort-level1`, `roles-level1`, `check-level1`) and one domain folder, `domains/equity-research/`, is harvested and sorted from a single source, the equity-research brief. Two skills have a hand run, two are unrun because the only raw source on this machine is that brief. The next session starts by bringing real artifacts into `raw/`, then runs `roles-level1` and `check-level1`, then builds the remaining harvesters. Read `docs/project-spec.md` and `references/domain-bins.md` first; this page says where to begin and what was decided. Updated 2026-10-21, end of the first session.
 
 **Origin:** This repo came out of the `product-spec-skills` session of 2026-10-21 (session `68bac1c8-c3dc-42bd-b19f-a42516ab046e`, [web](https://claude.ai/code/session_01EtJbacV359VffRPjttCASz)), where five AI-native spec sections were added and the missing input, the domain, became its own factory. The method for building skills by conversation is in `~/learnings/meta-spec/07-building-a-spec-skill.md`.
 
@@ -10,11 +10,11 @@
 |---|---|---|
 | Project spec | Drafted, not yet aligned; Hai confirmed the bins, charter, roles-first scope, tools, conversation, raw, exemplars, research in chat | `docs/project-spec.md` |
 | Contract | Written: Levels, scope rule, Catalog of ten parts, bin test, charter and roles registers, example rows, ten cross-bin rules | `references/domain-bins.md` |
-| Plugin | `/domain:<skill>`, validates with warnings, zero skills | `.claude-plugin/plugin.json`, `skills/` |
+| Plugin | `/domain:<skill>`, validates with warnings, four skills; none callable as `/domain:` until the plugin is reloaded, hand runs in chat until then | `.claude-plugin/plugin.json`, `skills/` |
 | House skills | Copied from `product-spec-skills`: `comms`, `skill-micro`, `show-ascii`, `skill-refine` | `.claude/skills/` |
-| Harness | Not started; adapt `product-spec-skills/tests/harness/harness.py` when the first skill exists | `tests/harness/` |
-| Domains | None; `domains/common/` is an empty folder | `domains/` |
-| Git | One commit, `4679d4d`, on `main`, no remote | |
+| Harness | Not started; adapt `product-spec-skills/tests/harness/harness.py`. One check exists: `tools/render_register.py` wraps register cells so no line exceeds 110 columns, and `domains/equity-research/build.py` holds the sorted rows as data and renders the nine files | `tests/harness/`, `tools/` |
+| Domains | `equity-research`: stub charter and three roles in `README.md`; one source in `raw/` (the brief, Reported); one candidate register; nine files sorted: 12 EN, 7 DT, 2 RU, 4 KN, 6 PR, 3 TL, 1 EX, 14 UN, 6 pains in the `roles.md` holding block. `roles-level1` and `check-level1` not run. `domains/common/` empty | `domains/equity-research/` |
+| Git | Eight commits on `main`, last `7978061`, no remote | |
 
 ## 2. Decisions Made in Chat (Hai, 2026-10-21)
 
@@ -31,13 +31,13 @@
 
 ## 3. Next Session, in Order
 
-1. **Collect three artifacts** from Hai into `domains/equity-research/raw/`: one memo of Hai's, one broker research note, the trade journal (CSV or Markdown). Add the PM newsletter sample if at hand. Grade each: Verified for records and primary documents, Reported for other firms' material.
-2. **Write the charter and role list by hand** at the top of `domains/equity-research/README.md`: Serves, Outcome, Yardstick; roles PM, analyst, trader, and any the artifacts name.
-3. **Harvest by hand:** run `/spec:glossary-level0` from `product-spec-skills` on each artifact to lift noun phrases, then sort every term with the bin test into the nine files, one row each in the Contract's register shape, raw path and tag on every row. Write every unplaced term and every conflict to `unknowns.md`.
-4. **Read the folder top to bottom** and note what the hand sort decided that the Contract did not say. Those notes are the Scope and Requirements of `harvest-doc-level0`.
-5. **Hai types `/skill-micro harvest-doc-level0`.** Anchors to search for the current year before proposing: information extraction and entity typing practice, domain-driven design's ubiquitous language (Evans) for entities and terms, data catalog practice for the data bin, regulatory taxonomy for rules, jobs-to-be-done (Christensen, Ulwick) for the role map. Three unknowns with defaults in brackets; Hai answers "use defaults" or picks.
-6. **Run the new skill on the same three artifacts,** diff against the hand sort, log the differences in the worklog, refine once.
-7. **Then** `harvest-record-level0` (the journal), `roles-level1`, `check-level1`; `sort-level1` and `merge-level1` only once two harvests exist to sort and merge. `interview-level0` needs a question script written with Hai as the first interviewee, on how a view forms and dies.
+1. **Bring real artifacts** into `domains/equity-research/raw/`: one memo of Hai's, one broker research note, the trade journal, the PM newsletter sample. Grade each: Verified for records and primary documents, Reported for other firms' material. Add a row per file to the Sources table in `README.md`.
+2. **Settle the fourteen Unknowns you can:** read `unknowns.md`; UN-07, UN-08 are yours; UN-09, UN-10, UN-11 are bin decisions an analyst makes; write answers as rows or as merged entities in `build.py`, rerun it, and mark the UN settled.
+3. **Run `roles-level1` by hand:** bind the six pains in the `roles.md` holding block to jobs, one `RO` row per role, charter roles first.
+4. **Run `check-level1` by hand:** rewrite the README in the fixed order with counts computed from the files; expect a fail on rule 8 (the yardstick is Unknown) and on rule 7 (four steps with no tool), both already UN rows.
+5. **Harvest the new artifacts** with `harvest-doc-level0` (memo, broker note, letter) and, once written, `harvest-record-level0` (the journal); then `sort-level1` again, which now exercises merge across harvests. Compare the second sort with the first: what merged, what conflicted.
+6. **Build the remaining skills** through `/skill-micro`, one per turn, searching anchors only where the field moved in the last year: `harvest-record-level0`, `harvest-chat-level0` (consent first), `harvest-feed-level0`, `harvest-method-level0`, `interview-level0` (question script, Hai as first interviewee), `merge-level1`, `research-level0` (web search on one Unknown, Reported only).
+7. **Harness:** copy `product-spec-skills/tests/harness/` and point `check` at the register renderer and the ten cross-bin rules, so a skill run is scored, not read.
 
 ## 4. Rules That Bite
 
@@ -47,6 +47,8 @@
 - A wish is never a rule. A method's rules are knowledge until the firm adopts them.
 - Raw PDFs are git-ignored by default; commit a raw file only with its owner's consent.
 - Worklog row at the end of every turn that changes a file.
+- Registers are rendered, not typed: rows go in a `build.py` per domain and through `tools/render_register.py`; hand-typed tables broke the 110-column rule in 45 lines on the first try.
+- Python heredocs with apostrophes fail in this shell; write a script file to the scratchpad and run it.
 
 ## 5. Open Decisions (from the spec)
 
