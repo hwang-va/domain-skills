@@ -27,7 +27,7 @@ Level 0 harvests: one skill per source kind reads one source and emits candidate
 | **Tools** | TL | `tools.md` | an app a role uses today: tool, roles, what goes in, what comes out, steps served | `sort-level1` |
 | **Exemplars** | EX | `exemplars.md` | a source kept to imitate: kind, raw path, keep, change, entity it becomes | `sort-level1` |
 | **Unknowns** | UN | `unknowns.md` | one question each, the kind of gap, the source that would settle it | every skill appends; `check-level1` dedupes |
-| **Reviews** | none | `reviews\<date>.md` | one proposed diff per finding from outcome records: kind, target, raw outcome rows, Before → After, gate cell | `review-level1` writes; Hai gates; `merge-level1` applies |
+| **Reviews** | none | `reviews\<date>.md` | one proposed diff per finding from outcome records: kind, target, raw outcome rows, Before → After, gate cell | `review-level1` writes; the owner gates; `merge-level1` applies |
 
 **Source Kinds and Harvesters:** document (`harvest-doc-level0`), feed (`harvest-feed-level0`), person (`interview-level0`), method (`harvest-method-level0`), record (`harvest-record-level0`), conversation (`harvest-chat-level0`), outside research on one Unknown (`research-level0`).
 
@@ -102,4 +102,4 @@ One register per file, one row per fact, the columns the Catalog names. Every ro
 8. The charter's served people are `RO` rows, its outcome an `EN`, its yardstick a `DT` about that `EN`; an outcome no `PR` step produces is an `UN`.
 9. Every fact names its raw file; every `EX` names the `EN` it becomes; a fact from `research-level0` keeps `no insider has confirmed` until an interview or a record confirms it.
 10. A wish (wanted of a product, not true of the domain) is never a bin row; it is a pain on the speaker's `RO` and is handed to the product spec.
-11. A folder row changes from an outcome only through `reviews\<date>.md`: `review-level1` proposes a diff with its raw outcome rows, Hai writes `applied` or `rejected` beside it, `merge-level1` applies the applied ones; a `KN` confidence moves one step per review and never on fewer than three outcome rows; a review never holds a size, an order, or a recommendation.
+11. A folder row changes from an outcome only through `reviews\<date>.md`: `review-level1` proposes a diff with its raw outcome rows, the owner writes `applied` or `rejected` beside it, `merge-level1` applies the applied ones; a `KN` confidence moves one step per review and never on fewer than three outcome rows; a review never holds a size, an order, or a recommendation.
