@@ -3,7 +3,7 @@
 set -euo pipefail
 SRC="$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
 DEST="${SKILLS_REPO:-$HOME/projects/hw-skills}/plugins/domain"
-BLOCK='valitana|vantage|julian|brais|dmitry|gritsai|hwang@|\bhai\b|\bwang\b'
+BLOCK='valitana|vantage|julian|brais|dmitry|gritsai|hwang@|\balex\b'
 FILES=("$SRC/skills" "$SRC/references" "$SRC/tools/render_register.py" "$SRC/tools/profile_record.py" "$SRC/.claude-plugin/plugin.json")
 
 if grep -rniE "$BLOCK" "${FILES[@]}"; then
