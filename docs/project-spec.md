@@ -78,10 +78,10 @@ One test per bin: who could make this fact false?
 | data | a vendor or a sensor | values about an entity that arrive from outside, with source and cadence | `data.md` | price, filing, estimate, news item, X post |
 | rule | a regulator or the firm | a must or never that holds whatever product is built, with source, severity, jurisdiction, validity | `rules.md` | MNPI handling, position limits, the firm's long-bias AI mandate |
 | knowledge | an expert; judgment that may be wrong | playbooks, theses, mental models, methods, with owner and confidence | `knowledge.md` | sector logic for semis, continuous-decision model, value investing |
-| process | the firm's workflow; steps a role performs in order | ordered steps, owner per step, handoffs | `process.md` | idea, research, decision, trade, review |
+| process | the firm's workflow; steps a role performs in order | ordered steps, owner per step, what starts each step, handoffs | `process.md` | idea, research, decision, trade, review |
 | tool | the vendor, or the firm's IT; an app a role uses today | tool, roles that use it, what goes in, what comes out, which process steps it serves | `tools.md` | email, Bloomberg terminal, Excel, the broker portal, Alpaca, eMoney |
 
-**Role Map (`roles.md`):** one row per human role with the verbs it performs, and per verb the job, the load, and the pain. A job is domain truth; it exists whether or not a product is built. The pain is where a product starts: the brief names the job, Purpose measures it, Agents assigns it. The folder records the pain and hands it on; it never designs the fix.
+**Role Map (`roles.md`):** one row per human role with the verbs it performs, and per verb the authority, the job, the load, and the pain. The authority says whether the role acts alone on that verb or whose sign-off it needs, sourced to a rule, a process step, or an interview; a verb no source settles is an Unknown, never assumed alone. A job is domain truth; it exists whether or not a product is built. The pain is where a product starts: the brief names the job, Purpose measures it, Agents assigns it. The folder records the pain and hands it on; it never designs the fix.
 
 **Unknowns (`unknowns.md`):** every fact a harvest could not place, every conflict between two sources, every term with two meanings, one question each, with the source that would settle it.
 
@@ -139,7 +139,7 @@ Same five steps as `product-spec-skills`, one skill per turn.
 ## 8. Cross-Bin Rules
 
 1. Every data row names the entity it describes; data with no entity is an entity gap.
-2. Every process step names a role in `roles.md` and the entities it reads or writes.
+2. Every process step names a role in `roles.md`, what starts it (a clock, an arriving data row, a handoff from another step, a role's ask, or a threshold a rule or a knowledge row sets), and the entities it reads or writes; a step with no start is an Unknown. Every role verb names its authority: alone, or the role that signs, with the rule or step that says so; unsettled is an Unknown, never alone.
 3. Every rule names its source and severity; a rule with no source is knowledge until proven.
 4. Every knowledge row names an owner and a confidence; knowledge with no owner is a feed claim, kept with its author.
 5. A term used in two bins with two meanings is an Unknown; the Glossary of any product spec in the domain starts from `entities.md`.
@@ -150,7 +150,7 @@ Same five steps as `product-spec-skills`, one skill per turn.
 
 ## 9. How the Spec Skills Read It
 
-`ingest-level0` copies the domain folder's README into the spec folder and grades it as a source. `purpose-level1` reads the charter first: the served people become Users, the outcome becomes the Summary, and the yardstick becomes the first measure row. `glossary-level0` harvests against `entities.md` first, so PU-01 can be measured. Every section skill's Target line gains "domain folder, if present, read first": Data Model reads entities, Interfaces reads data cadences and `tools.md` as the exchanges to wrap or replace, Product Surface reads `tools.md` for the screens a role has today, Risks reads rules by severity, Knowledge reads `knowledge.md` and the whole folder as the first distilled corpus with `raw/` as its raw layer, `lessons-level0` reads `exemplars.md` for other firms' patterns to Adopt, Adapt, or Avoid, Agents reads `roles.md` to propose one agent per job a human role wants to hand off. The role map is the bridge from domain to agent team: a role's verbs become the actions Autonomy tiers, and the pain becomes the Purpose measure.
+`ingest-level0` copies the domain folder's README into the spec folder and grades it as a source. `purpose-level1` reads the charter first: the served people become Users, the outcome becomes the Summary, and the yardstick becomes the first measure row. `glossary-level0` harvests against `entities.md` first, so PU-01 can be measured. Every section skill's Target line gains "domain folder, if present, read first": Data Model reads entities, Interfaces reads data cadences and `tools.md` as the exchanges to wrap or replace, Product Surface reads `tools.md` for the screens a role has today, Risks reads rules by severity, Knowledge reads `knowledge.md` and the whole folder as the first distilled corpus with `raw/` as its raw layer, `lessons-level0` reads `exemplars.md` for other firms' patterns to Adopt, Adapt, or Avoid, Agents reads `roles.md` to propose one agent per job a human role wants to hand off. The role map is the bridge from domain to agent team: a role's verbs become the actions Autonomy tiers, each verb's authority is the tier that action starts at and never a looser one when an agent takes the verb, each step's start is the trigger Agents maps onto its five (user turn, after run, background, scheduled, review), and the pain becomes the Purpose measure. Read this way, a process row is one action with every slot filled (role, start, verb, entities, authority): `process.md` is the design table, and the other bins are what its cells point into.
 
 ## 10. Open Decisions
 
@@ -170,7 +170,9 @@ Same five steps as `product-spec-skills`, one skill per turn.
 - **World:** a domain seen as the files its roles keep and the apps its roles use; the roles in scope bound it.
 - **Charter:** three lines at the top of a domain folder: whom the domain serves, the outcome it produces for them, the yardstick it judges that outcome by; domain truth that Purpose later measures.
 - **Domain folder:** `domains/<name>/` with one file per bin, a role map, an Unknowns list, and a README that opens with the charter, then the roles in scope, then the counts.
-- **Role map:** one row per human role with verbs, jobs, load, and pain; the input Agents reads.
+- **Role map:** one row per human role with verbs, authority per verb, jobs, load, and pain; the input Agents and Autonomy read.
+- **Start:** what wakes a process step, in domain words: a clock, an arriving data row, a handoff, a role's ask, a threshold; the fact the spec's Agents section maps to a trigger.
+- **Authority:** per role verb, `alone` or the role that signs, with its source; domain truth about who may decide, never a product decision about which agent takes the verb.
 - **Exemplar:** a source kept to be imitated: a letter, deck, alert, memo, or method skill file, indexed in `exemplars.md` with what to keep and change and the entity it becomes.
 - **Raw:** `domains/<name>/raw/`, every source verbatim with a grade; the raw layer of the domain as a Knowledge corpus.
 - **Candidate fact:** one line a harvest skill emits: text, bin, source, tag; not yet in the folder.

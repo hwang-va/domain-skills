@@ -18,12 +18,12 @@ Level 0 harvests: one skill per source kind reads one source and emits candidate
 | Part | Prefix | File | Holds | Skill that writes it |
 |---|---|---|---|---|
 | **Charter** | none | `README.md` top | Serves, Outcome, Yardstick: three lines | `check-level1` from `interview-level0` and `harvest-doc-level0` facts |
-| **Roles** | RO | `roles.md` | role, verbs, jobs, load, pain, tools used | `roles-level1` |
+| **Roles** | RO | `roles.md` | role, verbs, authority per verb, jobs, load, pain, tools used | `roles-level1` |
 | **Entities** | EN | `entities.md` | noun with identity and lifecycle: name, definition, identifier, states, relations | `sort-level1` |
 | **Data** | DT | `data.md` | values about an entity that arrive from outside: name, entity, source, cadence, unit | `sort-level1` |
 | **Rules** | RU | `rules.md` | a must or never that holds whatever product is built: text, source, severity, jurisdiction, validity | `sort-level1` |
 | **Knowledge** | KN | `knowledge.md` | judgment that may be wrong: text, owner, confidence, validity, method or view | `sort-level1` |
-| **Process** | PR | `process.md` | ordered steps a role performs: step, owner role, reads, writes, tool, handoff | `sort-level1` |
+| **Process** | PR | `process.md` | ordered steps a role performs: step, owner role, starts on, reads, writes, tool, handoff | `sort-level1` |
 | **Tools** | TL | `tools.md` | an app a role uses today: tool, roles, what goes in, what comes out, steps served | `sort-level1` |
 | **Exemplars** | EX | `exemplars.md` | a source kept to imitate: kind, raw path, keep, change, entity it becomes | `sort-level1` |
 | **Unknowns** | UN | `unknowns.md` | one question each, the kind of gap, the source that would settle it | every skill appends; `check-level1` dedupes |
@@ -66,13 +66,14 @@ A fact that fits two bins is split into two facts. A method's rules are knowledg
 - **B. Jobs.** Per verb, the job in one line: the outcome the role is responsible for.
 - **C. Load and Pain.** Per job, how much and how often, and what hurts, in the role's own words when a source gives them.
 - **D. Tools.** The `TL-NN` rows this role uses.
+- **E. Authority.** Per verb, `alone` or the `RO` that signs, with the `RU` or `PR` row or the raw interview that says so. The cell reads `all alone (RU-04)` or `report: RO-01 signs (PR-05)`. A verb no source settles is `Unknown`, never `alone`; the rule check counts them.
 
 ```
- #     Role            Verbs                          Job                              Load          Pain                       Tools
- RO-01 PM              read, form view, decide        decide weights each cycle        daily, 2 h    too much to read, misses   TL-01, TL-03
- RO-02 Quant analyst   blend, run model, report       turn views into weights          weekly        views arrive as prose      TL-02
- RO-03 Client          read letter, ask               understand what changed and why  quarterly     letter late, jargon        TL-04
-Rule check: 3 roles · 3 with a pain · 0 without tools                                                                     Reported
+ #     Role            Verbs                          Authority                      Job                              Load          Pain                       Tools
+ RO-01 PM              read, form view, decide        all alone (RU-04)              decide weights each cycle        daily, 2 h    too much to read, misses   TL-01, TL-03
+ RO-02 Quant analyst   blend, run model, report       report: RO-01 signs (PR-05)    turn views into weights          weekly        views arrive as prose      TL-02
+ RO-03 Client          read letter, ask               Unknown                        understand what changed and why  quarterly     letter late, jargon        TL-04
+Rule check: 3 roles · 3 with a pain · 0 without tools · 1 with Unknown authority                                                                     Reported
 ```
 
 ## Entities, Data, Rules, Knowledge, Process, Tools
@@ -84,7 +85,7 @@ One register per file, one row per fact, the columns the Catalog names. Every ro
  DT-03 Price         about EN-01 │ source: market data vendor │ cadence: daily close, intraday │ unit: USD        raw/journal.csv     Verified
  RU-02 MNPI          never trade on material non-public information │ source: regulator │ severity: critical │ jurisdiction: US │ valid: always   Reported
  KN-05 Semis view    AI capex stays above trend through 2027 │ owner: RO-04 sector researcher │ confidence: medium │ valid: 2026-Q4   raw/memo-03.md  Reported
- PR-04 Blend views   owner RO-02 │ reads KN-*, DT-03 │ writes EN-05 ModelRun │ tool TL-02 │ hands to PR-05 recommend                 Reported
+ PR-04 Blend views   owner RO-02 │ starts: PR-03 handed │ reads KN-*, DT-03 │ writes EN-05 ModelRun │ tool TL-02 │ hands to PR-05 recommend                 Reported
  TL-02 Quant model   roles RO-02 │ in: views, prices │ out: weights │ serves PR-04 │ where it runs: Unknown                              Inferred
  EX-01 Letter sample other fund's quarterly letter │ raw/letter-xyz.pdf │ keep: structure, attribution table │ change: tone │ becomes EN-08 Letter
  UN-03 Which six asset classes, by name? │ kind: entity gap │ settles: the IPS or RO-01
@@ -93,7 +94,7 @@ One register per file, one row per fact, the columns the Catalog names. Every ro
 ## Cross-Bin Rules
 
 1. Every `DT` row names the `EN` it describes; data with no entity is an entity gap.
-2. Every `PR` step names an owner `RO` and the `EN` it reads or writes.
+2. Every `PR` step names an owner `RO`, what starts it (a clock, an arriving `DT`, a `PR` handoff, a role's ask, or a threshold a `RU` or `KN` sets, in domain words), and the `EN` it reads or writes; a step with no start is an `UN`.
 3. Every `RU` names its source and severity; a rule with no source is knowledge until proven.
 4. Every `KN` names an owner and a confidence; knowledge with no owner is a feed claim, kept with its author.
 5. A term used in two bins with two meanings is an `UN`; a product spec's Glossary in this domain starts from `entities.md`.
@@ -103,3 +104,4 @@ One register per file, one row per fact, the columns the Catalog names. Every ro
 9. Every fact names its raw file; every `EX` names the `EN` it becomes; a fact from `research-level0` keeps `no insider has confirmed` until an interview or a record confirms it.
 10. A wish (wanted of a product, not true of the domain) is never a bin row; it is a pain on the speaker's `RO` and is handed to the product spec.
 11. A folder row changes from an outcome only through `reviews\<date>.md`: `review-level1` proposes a diff with its raw outcome rows, the owner writes `applied` or `rejected` beside it, `merge-level1` applies the applied ones; a `KN` confidence moves one step per review and never on fewer than three outcome rows; a review never holds a size, an order, or a recommendation.
+12. Every `RO` verb carries an authority: `alone`, or the `RO` that signs, each sourced to a `RU` or `PR` row or a raw interview; a verb no source settles is `Unknown`, never `alone`. The authority is domain truth about who may decide; which agent takes the verb is the product spec's call.

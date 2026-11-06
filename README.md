@@ -11,6 +11,7 @@
 | Path | Role |
 |---|---|
 | `docs/project-spec.md` | Purpose, charter, roles-first scope, the six bins, the loop, the skills, cross-bin rules, how the spec skills read a folder. |
+| `docs/human-ai-cowork.md` | The one-line action model (actor, trigger, verb, thing, right) behind `starts on` and `authority` in the contract; the process row as the line, the bins as its lookups; a sketch on a paper investing loop. |
 | `references/domain-bins.md` | The Contract: bins, tests, file contracts, legend, cross-bin rules. To be written. |
 | `skills/<name>/SKILL.md` | One skill per source kind or folder step, run as `/domain:<name>`. |
 | `domains/<name>/` | One folder per domain; `raw/` holds every source verbatim with a grade. |
