@@ -85,7 +85,7 @@ One register per file, one row per fact, the columns the Catalog names. Every ro
  DT-03 Price         about EN-01 │ source: market data vendor │ cadence: daily close, intraday │ unit: USD        raw/journal.csv     Verified
  RU-02 MNPI          never trade on material non-public information │ source: regulator │ severity: critical │ jurisdiction: US │ valid: always   Reported
  KN-05 Semis view    AI capex stays above trend through 2027 │ owner: RO-04 sector researcher │ confidence: medium │ valid: 2026-Q4   raw/memo-03.md  Reported
- PR-04 Blend views   owner RO-02 │ starts: PR-03 handed │ reads KN-*, DT-03 │ writes EN-05 ModelRun │ tool TL-02 │ hands to PR-05 recommend                 Reported
+ PR-04 Blend views   owner RO-02 │ starts on: handoff: PR-03 handed │ reads KN-*, DT-03 │ writes EN-05 ModelRun │ tool TL-02 │ hands to PR-05 recommend                 Reported
  TL-02 Quant model   roles RO-02 │ in: views, prices │ out: weights │ serves PR-04 │ where it runs: Unknown                              Inferred
  EX-01 Letter sample other fund's quarterly letter │ raw/letter-xyz.pdf │ keep: structure, attribution table │ change: tone │ becomes EN-08 Letter
  UN-03 Which six asset classes, by name? │ kind: entity gap │ settles: the IPS or RO-01
@@ -94,7 +94,7 @@ One register per file, one row per fact, the columns the Catalog names. Every ro
 ## Cross-Bin Rules
 
 1. Every `DT` row names the `EN` it describes; data with no entity is an entity gap.
-2. Every `PR` step names an owner `RO`, what starts it (a clock, an arriving `DT`, a `PR` handoff, a role's ask, or a threshold a `RU` or `KN` sets, in domain words), and the `EN` it reads or writes; a step with no start is an `UN`.
+2. Every `PR` step names an owner `RO`, what starts it, and the `EN` it reads or writes; a step with no start is an `UN`. The start cell is kind first, then domain words, then the row it cites: `clock` (cites nothing), `handoff` (the `PR` before it or the `EN` that step wrote), `row` (an arriving `DT`), `ask` (an `RO`), `threshold` (the `RU` or `KN` that sets the number).
 3. Every `RU` names its source and severity; a rule with no source is knowledge until proven.
 4. Every `KN` names an owner and a confidence; knowledge with no owner is a feed claim, kept with its author.
 5. A term used in two bins with two meanings is an `UN`; a product spec's Glossary in this domain starts from `entities.md`.
