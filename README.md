@@ -21,7 +21,7 @@
 
 ## Skills Planned
 
-`harvest-doc-level0`, `harvest-feed-level0`, `interview-level0`, `harvest-method-level0`, `harvest-record-level0`, `harvest-chat-level0`, `research-level0`, `sort-level1`, `merge-level1`, `roles-level1`, `check-level1`.
+`harvest-doc-level0`, `harvest-feed-level0`, `interview-level0`, `harvest-method-level0`, `harvest-record-level0`, `harvest-chat-level0`, `research-level0`, `sort-level1`, `merge-level1`, `roles-level1`, `check-level1`, `review-level1`, `collect-level1` (what to collect next, from whom, the question to ask), `problems-level1` (the derived problem register, planned).
 
 ## Domains It Fits
 

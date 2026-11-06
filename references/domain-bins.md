@@ -28,6 +28,7 @@ Level 0 harvests: one skill per source kind reads one source and emits candidate
 | **Exemplars** | EX | `exemplars.md` | a source kept to imitate: kind, raw path, keep, change, entity it becomes | `sort-level1` |
 | **Unknowns** | UN | `unknowns.md` | one question each, the kind of gap, the source that would settle it | every skill appends; `check-level1` dedupes |
 | **Reviews** | none | `reviews\<date>.md` | one proposed diff per finding from outcome records: kind, target, raw outcome rows, Before → After, gate cell | `review-level1` writes; the owner gates; `merge-level1` applies |
+| **Collect** | CO | `collect.md` | one row per gap the folder cannot fill by itself: detector (coverage, conformance, yardstick, unknown), evidence, get, from, ask, unblocks, priority, status; a question sheet per stakeholder | `collect-level1` writes; the owner closes a row by naming the raw file that arrived |
 
 **Source Kinds and Harvesters:** document (`harvest-doc-level0`), feed (`harvest-feed-level0`), person (`interview-level0`), method (`harvest-method-level0`), record (`harvest-record-level0`), conversation (`harvest-chat-level0`), outside research on one Unknown (`research-level0`).
 
@@ -91,6 +92,20 @@ One register per file, one row per fact, the columns the Catalog names. Every ro
  UN-03 Which six asset classes, by name? │ kind: entity gap │ settles: the IPS or RO-01
 ```
 
+## Collect
+
+One row per gap, four detectors. The ask is always a specific past instance or an artifact, never an opinion. A row closes only when a raw file arrives.
+
+```
+ #     Detector    Evidence                  Get                                    From          Ask                                        Unblocks              Status
+ CO-04 yardstick   PR-05, no DT for          fills, 3 months: order id, time, size, RO-04 trader, "walk me through the last block order you  PR-05 problem; RO-04  open
+                   slippage; RO-04 has no    fill price, arrival price, broker      TL-06 OMS     worked: where did the price end up versus  submit authority
+                   raw source                                                                     when it arrived?"
+ CO-05 unknown     UN-12 · settles RO-01     the research policy, or a yes or no    RO-01 PM      "last month, which memos reached the       RO-02 draft authority open
+                                                                                                  trader without your sign-off?"
+ Rule check: 2 rows · 0 closed · 1 no insider has confirmed                                                                                                  Inferred
+```
+
 ## Cross-Bin Rules
 
 1. Every `DT` row names the `EN` it describes; data with no entity is an entity gap.
@@ -105,3 +120,4 @@ One register per file, one row per fact, the columns the Catalog names. Every ro
 10. A wish (wanted of a product, not true of the domain) is never a bin row; it is a pain on the speaker's `RO` and is handed to the product spec.
 11. A folder row changes from an outcome only through `reviews\<date>.md`: `review-level1` proposes a diff with its raw outcome rows, the owner writes `applied` or `rejected` beside it, `merge-level1` applies the applied ones; a `KN` confidence moves one step per review and never on fewer than three outcome rows; a review never holds a size, an order, or a recommendation.
 12. Every `RO` verb carries an authority: `alone`, or the `RO` that signs, each sourced to a `RU` or `PR` row or a raw interview; a verb no source settles is `Unknown`, never `alone`. The authority is domain truth about who may decide; which agent takes the verb is the product spec's call.
+13. A `CO` row closes only when its `status` names a raw file; a yardstick row keeps `no insider has confirmed` until a `DT` row computes the measure from a record; a `CO` row never names a solution, and its ask never contains "would you" or a product idea.
