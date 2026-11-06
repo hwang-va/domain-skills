@@ -4,7 +4,7 @@
 
 **Premise:** Domain truth lives in heads, broker PDFs, feeds, podcasts, journals, and chats, and every product brief restates it badly. Forcing each source through a fixed bin test, "who could make this fact false", sorts it and exposes what is missing. The folder is a gap-finding instrument first, a reference second.
 
-**Status:** Project spec drafted 2026-10-21; no skill built yet. Read `docs/project-spec.md`.
+**Status:** Project spec 2026-10-21. Eight skills authored and validated (`harvest-doc`, `harvest-chat`, `harvest-record`, `interview`, `sort`, `roles`, `check`, `review`), run by hand with the owner gating each output. One domain folder, `domains/equity-research/`, at stub stage from one source. Contract extended 2026-11-06 with `starts on` per step and `authority` per role verb. Read `docs/project-spec.md`.
 
 ## Layout
 
@@ -23,6 +23,12 @@
 
 `harvest-doc-level0`, `harvest-feed-level0`, `interview-level0`, `harvest-method-level0`, `harvest-record-level0`, `harvest-chat-level0`, `research-level0`, `sort-level1`, `merge-level1`, `roles-level1`, `check-level1`.
 
-## First Domain
+## Domains It Fits
 
-Equity research, long-short, AI sector: three real artifacts (a memo, a broker note, the trade journal) harvested and sorted by hand before any skill exists, so the skills encode decisions, not guesses.
+**General by Design:** the six bins and the test "who could make this fact false" are not about investing. Any professional domain sorts the same way: a lab result is data, a prescribing rule is a rule, intake then exam then treatment is process. The tool captures how a profession works today, in the words its roles use, for a person and an agent to read alike.
+
+**Best Fit:** knowledge work with well digitised documentation and applications that expose an API. Where the records already exist as files, feeds and app data, the harvest is reading rather than interviewing, and each row in the tools bin is an interface the product can later wrap.
+
+**Candidate Domains:** an investment platform and its parts (equity research, analytics, order management), and outside finance, health management or any other role-bounded professional practice.
+
+**First Domain:** equity research, long-short, AI sector: three real artifacts (a memo, a broker note, the trade journal) harvested and sorted by hand before the skills, so the skills encode decisions, not guesses.
