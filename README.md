@@ -32,4 +32,17 @@
 
 **Candidate Domains:** an investment platform and its parts (equity research, analytics, order management), and outside finance, health management or any other role-bounded professional practice.
 
+**What Counts as One Domain:** a set of roles with one shared outcome, never a firm. The charter forces the size: serves whom, produces what, judged how. If the three lines cannot be written, the scope is too big; if the outcome is a feature, it is too small and belongs to the product spec. A folder finishes in about a week; a role added later widens it by `merge-level1`, never a restart; shared terms live once in `domains/common/`.
+
+```
+ too big     "the company"                 many outcomes, no single yardstick
+ too big     "the marketing department"    until the roles and the one outcome are named
+ right size  campaign manager + sales rep  outcome: qualified leads     yardstick: SQLs per quarter
+ right size  PM + analyst + trader         outcome: a security-level call  yardstick: hit rate vs benchmark
+ right size  PM + LP + investor relations  outcome: an LP who knows what changed  yardstick: asks answered in a day
+ too small   "the filing alert feature"    a solution, not a domain: the product spec
+```
+
+**Products Are Cut from the Folder:** a product is never the domain; the domain is the roles the product serves and the outcome they already produce by hand today. A whole product usually maps to one folder; a part of a product maps to the steps of that folder it touches, so the same folder is read and only those steps are specified. The folder is written once; products and parts are cut from it.
+
 **First Domain:** equity research, long-short, AI sector: three real artifacts (a memo, a broker note, the trade journal) harvested and sorted by hand before the skills, so the skills encode decisions, not guesses.
